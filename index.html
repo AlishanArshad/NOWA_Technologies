@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050505">
+  <meta name="description" content="NOWA Technologies designs and builds high-impact digital products, platforms and brand experiences.">
+  <title>NOWA Technologies — Digital Products & Experiences</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="preload" href="assets/fonts/GilmerRegular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/GilmerBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <img src="assets/images/nowa-mark.png" alt="">
+      <div class="loader__track"><span></span></div>
+      <p><span class="loader__count">0</span>%</p>
+    </div>
+  </div>
+
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"><span>VIEW</span></div>
+
+  <header class="site-header">
+    <a class="brand magnetic" href="#top" aria-label="NOWA Technologies home">
+      <img src="assets/images/nowa-horizontal.png" alt="NOWA Technologies">
+    </a>
+    <div class="header__right">
+      <a href="#contact" class="header__talk link-line">Start a project</a>
+      <button class="menu-toggle magnetic" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+        <b>Menu</b>
+      </button>
+    </div>
+  </header>
+
+  <aside class="menu-panel" aria-hidden="true">
+    <div class="menu-panel__noise"></div>
+    <nav aria-label="Primary navigation">
+      <a href="#about"><span>01</span><strong>About</strong></a>
+      <a href="#services"><span>02</span><strong>Services</strong></a>
+      <a href="#work"><span>03</span><strong>Work</strong></a>
+      <a href="#process"><span>04</span><strong>Process</strong></a>
+      <a href="#contact"><span>05</span><strong>Contact</strong></a>
+    </nav>
+    <div class="menu-panel__footer">
+      <p>Building digital products for ambitious companies.</p>
+      <a href="mailto:hello@nowatechnologies.com">hello@nowatechnologies.com</a>
+    </div>
+  </aside>
+
+  <main id="top">
+    <section class="hero section-dark" aria-labelledby="hero-title">
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__orb hero__orb--one" data-parallax="-0.14"></div>
+      <div class="hero__orb hero__orb--two" data-parallax="0.09"></div>
+      <div class="hero__content container">
+        <p class="eyebrow reveal">Independent digital product studio · 2026</p>
+        <h1 id="hero-title" class="hero__title" aria-label="We transform ideas into digital impact">
+          <span class="hero-line"><i>WE</i></span>
+          <span class="hero-line outline"><i>TRANSFORM</i></span>
+          <span class="hero-line hero-line--offset"><i>IDEAS<span class="accent-dot">.</span></i></span>
+        </h1>
+        <div class="hero__bottom reveal">
+          <p>Strategy, design and engineering for websites, mobile products and scalable digital platforms.</p>
+          <a class="circle-cta magnetic" href="#about" aria-label="Explore NOWA Technologies">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <path id="heroCircle" d="M50,50 m-35,0 a35,35 0 1,1 70,0 a35,35 0 1,1 -70,0" fill="none"/>
+              <text><textPath href="#heroCircle">SCROLL TO DISCOVER · SCROLL TO DISCOVER · </textPath></text>
+            </svg>
+            <span>↓</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero__side-note">DESIGN / DEVELOPMENT / GROWTH</div>
+    </section>
+
+    <section class="statement section-light" id="about">
+      <div class="container">
+        <p class="section-kicker reveal"><span>01</span> Who we are</p>
+        <h2 class="statement__title split-reveal">We turn complex business challenges into clear, useful and unforgettable digital experiences.</h2>
+        <div class="statement__meta reveal">
+          <p>NOWA Technologies combines product thinking, expressive design and reliable engineering. One focused team, from first idea to final launch.</p>
+          <a href="#services" class="text-arrow magnetic">Explore our capabilities <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee marquee--yellow" aria-hidden="true">
+      <div class="marquee__track">
+        <span>WEBSITES</span><b>✦</b><span>MOBILE APPS</span><b>✦</b><span>BRAND SYSTEMS</span><b>✦</b><span>PRODUCT DESIGN</span><b>✦</b>
+        <span>WEBSITES</span><b>✦</b><span>MOBILE APPS</span><b>✦</b><span>BRAND SYSTEMS</span><b>✦</b><span>PRODUCT DESIGN</span><b>✦</b>
+      </div>
+    </div>
+
+    <section class="services section-dark" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker reveal"><span>02</span> What we do</p>
+          <h2 class="display-title split-reveal">Services built around outcomes<span class="accent-dot">.</span></h2>
+        </div>
+        <div class="services__layout">
+          <div class="services__list">
+            <article class="service-row is-active" data-service="01" data-label="PRODUCT">
+              <div class="service-row__number">01</div>
+              <div>
+                <h3>Product Strategy</h3>
+                <p>Research, positioning, roadmaps, user journeys and practical plans that align product decisions with business goals.</p>
+              </div>
+              <span class="service-row__arrow">↗</span>
+            </article>
+            <article class="service-row" data-service="02" data-label="DESIGN">
+              <div class="service-row__number">02</div>
+              <div>
+                <h3>UX & UI Design</h3>
+                <p>High-converting interfaces, design systems and interactive prototypes that are intuitive, accessible and distinctly yours.</p>
+              </div>
+              <span class="service-row__arrow">↗</span>
+            </article>
+            <article class="service-row" data-service="03" data-label="BUILD">
+              <div class="service-row__number">03</div>
+              <div>
+                <h3>Web Development</h3>
+                <p>Fast, responsive websites and web applications built with modern front-end and back-end technologies.</p>
+              </div>
+              <span class="service-row__arrow">↗</span>
+            </article>
+            <article class="service-row" data-service="04" data-label="MOBILE">
+              <div class="service-row__number">04</div>
+              <div>
+                <h3>Mobile Products</h3>
+                <p>Purposeful iOS, Android and cross-platform products designed for smooth experiences and sustainable growth.</p>
+              </div>
+              <span class="service-row__arrow">↗</span>
+            </article>
+            <article class="service-row" data-service="05" data-label="GROWTH">
+              <div class="service-row__number">05</div>
+              <div>
+                <h3>Launch & Growth</h3>
+                <p>Analytics, experimentation, content systems and continuous optimization after launch.</p>
+              </div>
+              <span class="service-row__arrow">↗</span>
+            </article>
+          </div>
+          <div class="services__visual" aria-hidden="true">
+            <div class="service-visual__ring ring-a"></div>
+            <div class="service-visual__ring ring-b"></div>
+            <div class="service-visual__core">
+              <span class="service-visual__number">01</span>
+              <strong class="service-visual__label">PRODUCT</strong>
+            </div>
+            <div class="service-visual__pixels">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="technology section-yellow">
+      <div class="container technology__top">
+        <p class="section-kicker reveal"><span>03</span> Technology</p>
+        <h2 class="display-title split-reveal">The right stack, not the trendy stack.</h2>
+        <p class="reveal">We select tools according to product needs, team capability, performance, security and long-term maintainability.</p>
+      </div>
+      <div class="tech-cloud" aria-label="Technologies we work with">
+        <span style="--x:8%;--y:15%;--r:-8deg">React</span>
+        <span style="--x:30%;--y:5%;--r:5deg">Next.js</span>
+        <span style="--x:57%;--y:17%;--r:-4deg">Node.js</span>
+        <span style="--x:78%;--y:7%;--r:7deg">TypeScript</span>
+        <span style="--x:15%;--y:57%;--r:4deg">Supabase</span>
+        <span style="--x:38%;--y:45%;--r:-6deg">PostgreSQL</span>
+        <span style="--x:66%;--y:58%;--r:5deg">Shopify</span>
+        <span style="--x:82%;--y:43%;--r:-8deg">WordPress</span>
+        <span style="--x:5%;--y:83%;--r:-3deg">AWS</span>
+        <span style="--x:29%;--y:78%;--r:7deg">Figma</span>
+        <span style="--x:54%;--y:86%;--r:-5deg">Three.js</span>
+        <span style="--x:76%;--y:80%;--r:4deg">GSAP</span>
+      </div>
+    </section>
+
+    <section class="work section-dark" id="work">
+      <div class="work__intro container">
+        <p class="section-kicker reveal"><span>04</span> Selected work</p>
+        <h2 class="display-title split-reveal">Ideas made tangible<span class="accent-dot">.</span></h2>
+        <p class="reveal">A selection of concept projects showing our approach to product, interaction and visual systems.</p>
+      </div>
+      <div class="horizontal-wrap">
+        <div class="horizontal-sticky">
+          <div class="horizontal-track">
+            <article class="project-card project-card--one cursor-view">
+              <div class="project-card__top"><span>01 / 04</span><span>FINTECH PLATFORM</span></div>
+              <div class="project-card__visual">
+                <div class="finance-ui">
+                  <div class="finance-ui__nav"><i></i><i></i><i></i></div>
+                  <p>Portfolio value</p><strong>$482,760</strong>
+                  <div class="chart"><span></span></div>
+                  <div class="finance-ui__cards"><i></i><i></i><i></i></div>
+                </div>
+              </div>
+              <div class="project-card__bottom"><h3>Axis Finance</h3><p>Brand, UX/UI, Web App</p><b>↗</b></div>
+            </article>
+            <article class="project-card project-card--two cursor-view">
+              <div class="project-card__top"><span>02 / 04</span><span>SPORTS TECHNOLOGY</span></div>
+              <div class="project-card__visual">
+                <div class="athlete-ui">
+                  <div class="athlete-ui__photo"><span>24</span></div>
+                  <div class="athlete-ui__data"><small>PLAYER PROFILE</small><strong>JALEN<br>CARTER</strong><p>Speed · Strength · Vision</p><button>View stats</button></div>
+                </div>
+              </div>
+              <div class="project-card__bottom"><h3>Athllo</h3><p>Product Strategy, UX/UI, Development</p><b>↗</b></div>
+            </article>
+            <article class="project-card project-card--three cursor-view">
+              <div class="project-card__top"><span>03 / 04</span><span>COMMERCE EXPERIENCE</span></div>
+              <div class="project-card__visual">
+                <div class="commerce-ui">
+                  <div class="commerce-ui__word">NØRD</div>
+                  <div class="commerce-ui__product"><i></i><i></i><i></i></div>
+                  <span>MODULAR / 01</span>
+                </div>
+              </div>
+              <div class="project-card__bottom"><h3>Nørd Objects</h3><p>Identity, E-commerce, Motion</p><b>↗</b></div>
+            </article>
+            <article class="project-card project-card--four cursor-view">
+              <div class="project-card__top"><span>04 / 04</span><span>AI WORKSPACE</span></div>
+              <div class="project-card__visual">
+                <div class="ai-ui">
+                  <div class="ai-ui__orb"></div>
+                  <h4>Think faster.<br>Decide better.</h4>
+                  <div class="ai-ui__prompt">Ask NOVA anything <span>↗</span></div>
+                </div>
+              </div>
+              <div class="project-card__bottom"><h3>NOVA AI</h3><p>Product Design, WebGL, Front-end</p><b>↗</b></div>
+            </article>
+            <div class="horizontal-end">
+              <p>Have a project in mind?</p>
+              <a href="#contact" class="big-link magnetic">LET'S<br><span>BUILD</span> ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="numbers section-light">
+      <div class="container">
+        <p class="section-kicker reveal"><span>05</span> Why NOWA</p>
+        <div class="numbers__grid">
+          <article class="reveal"><strong data-count="40" data-suffix="+">0</strong><h3>Products launched</h3><p>From early-stage MVPs to established platforms and brand ecosystems.</p></article>
+          <article class="reveal"><strong data-count="12" data-suffix="">0</strong><h3>Specialists</h3><p>A focused senior team across strategy, design, development and growth.</p></article>
+          <article class="reveal"><strong data-count="8" data-suffix="+">0</strong><h3>Markets served</h3><p>Remote collaboration with founders and teams across multiple time zones.</p></article>
+          <article class="reveal"><strong data-count="96" data-suffix="%">0</strong><h3>Client retention</h3><p>Long-term partnerships built on clarity, quality and dependable delivery.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="process section-dark" id="process">
+      <div class="container">
+        <div class="process__heading">
+          <p class="section-kicker reveal"><span>06</span> How we work</p>
+          <h2 class="display-title split-reveal">Small team.<br>Clear process.<br>Serious momentum.</h2>
+        </div>
+        <div class="process__steps">
+          <article class="process-step reveal"><span>01</span><h3>Discover</h3><p>We align around the problem, audience, priorities, constraints and measurable outcomes.</p><i></i></article>
+          <article class="process-step reveal"><span>02</span><h3>Define</h3><p>We shape the product direction, information architecture, scope and creative system.</p><i></i></article>
+          <article class="process-step reveal"><span>03</span><h3>Design</h3><p>We prototype the experience, test assumptions and refine every meaningful interaction.</p><i></i></article>
+          <article class="process-step reveal"><span>04</span><h3>Build</h3><p>We engineer, integrate, optimize and quality-check the product across devices.</p><i></i></article>
+          <article class="process-step reveal"><span>05</span><h3>Grow</h3><p>We launch, learn from real usage and keep improving the product after release.</p><i></i></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote section-yellow">
+      <div class="container quote__inner">
+        <div class="quote__mark">“</div>
+        <blockquote class="split-reveal">NOWA understood the business problem before touching the interface. The result felt sharp, fast and genuinely built for our users.</blockquote>
+        <div class="quote__author reveal"><strong>Partner testimonial</strong><span>Product Founder · Dubai</span></div>
+      </div>
+    </section>
+
+    <section class="contact section-dark" id="contact">
+      <div class="contact__rings" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="container contact__inner">
+        <p class="section-kicker reveal"><span>07</span> Start a conversation</p>
+        <h2 class="contact__title split-reveal">Have an idea worth building?</h2>
+        <button class="contact__button magnetic open-contact" type="button">LET'S TALK <span>↗</span></button>
+        <div class="contact__details reveal">
+          <a class="link-line" href="mailto:hello@nowatechnologies.com">hello@nowatechnologies.com</a>
+          <p>Available for selected projects worldwide.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div><img src="assets/images/nowa-stacked.png" alt="NOWA Technologies"></div>
+      <div><p>Explore</p><a href="#about">About</a><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a></div>
+      <div><p>Social</p><a href="#">LinkedIn ↗</a><a href="#">Instagram ↗</a><a href="#">Dribbble ↗</a></div>
+      <div><p>Contact</p><a href="mailto:hello@nowatechnologies.com">Email us ↗</a><a href="#contact">Start a project ↗</a></div>
+    </div>
+    <div class="container footer__bottom"><span>© <span id="year"></span> NOWA Technologies</span><span>Strategy · Design · Technology</span><a href="#top">Back to top ↑</a></div>
+  </footer>
+
+  <dialog class="contact-modal">
+    <button class="modal-close" type="button" aria-label="Close contact form">×</button>
+    <div class="contact-modal__intro">
+      <img src="assets/images/nowa-mark.png" alt="">
+      <p>Tell us what you are building.</p>
+      <h2>Let’s make it real<span class="accent-dot">.</span></h2>
+    </div>
+    <form class="contact-form" novalidate>
+      <label><span>Your name</span><input name="name" type="text" placeholder="Jane Smith" required></label>
+      <label><span>Email address</span><input name="email" type="email" placeholder="jane@company.com" required></label>
+      <label><span>Company / brand</span><input name="company" type="text" placeholder="Company name"></label>
+      <label><span>What do you need?</span>
+        <select name="service" required>
+          <option value="">Select a service</option><option>Website</option><option>Web application</option><option>Mobile application</option><option>UX/UI design</option><option>Brand identity</option><option>Other</option>
+        </select>
+      </label>
+      <label class="full"><span>Project details</span><textarea name="message" rows="4" placeholder="Share the goal, scope and ideal timeline." required></textarea></label>
+      <button class="form-submit magnetic" type="submit">Send inquiry <span>↗</span></button>
+      <p class="form-status" role="status"></p>
+    </form>
+  </dialog>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
