@@ -859,3 +859,36 @@ main{overflow:clip}
 @media (max-height:600px) and (orientation:landscape){
   .hero__webgl{opacity:.64!important}
 }
+/* ================================
+   SIDE MENU HOVER FIX
+   Add this at the VERY END of CSS
+================================ */
+
+.menu-panel nav a:hover strong,
+.menu-panel nav a[aria-current="page"] strong {
+  color: #ffffff !important; /* fallback */
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1.5px #ffffff !important;
+  text-shadow: none !important;
+}
+
+/* normal menu text */
+.menu-panel nav a strong {
+  color: #000000;
+  -webkit-text-fill-color: #000000;
+  -webkit-text-stroke: 0 transparent;
+}
+
+/* hover must come after normal rule */
+.menu-panel nav a:hover strong {
+  color: #ffffff !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1.5px #ffffff !important;
+}
+
+/* current/active page */
+.menu-panel nav a[aria-current="page"] strong {
+  color: #ffffff !important;
+  -webkit-text-fill-color: transparent !important;
+  -webkit-text-stroke: 1.5px #ffffff !important;
+}
