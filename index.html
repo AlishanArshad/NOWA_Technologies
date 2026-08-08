@@ -7,11 +7,12 @@
   <meta name="description" content="NOWA Technologies designs and builds high-impact digital products, platforms and brand experiences.">
   <title>NOWA Technologies — Digital Products & Experiences</title>
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
-  <link rel="preload" href="assets/fonts/GilmerRegular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/GilmerBold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body data-page="home">
   <div class="loader" aria-hidden="true">
     <div class="loader__inner">
       <img src="assets/images/nowa-mark.png" alt="">
@@ -19,20 +20,18 @@
       <p><span class="loader__count">0</span>%</p>
     </div>
   </div>
-
+  <div class="page-transition" aria-hidden="true"><span>NOWA</span></div>
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
   <div class="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-ring" aria-hidden="true"><span>VIEW</span></div>
-
   <header class="site-header">
-    <a class="brand magnetic" href="#top" aria-label="NOWA Technologies home">
+    <a class="brand magnetic" href="index.html" aria-label="NOWA Technologies home">
       <img src="assets/images/nowa-horizontal.png" alt="NOWA Technologies">
     </a>
     <div class="header__right">
-      <a href="#contact" class="header__talk link-line">Start a project</a>
+      <a href="contact.html" class="header__talk link-line">Start a project</a>
       <button class="menu-toggle magnetic" type="button" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span>
-        <b>Menu</b>
+        <span></span><span></span><b>Menu</b>
       </button>
     </div>
   </header>
@@ -40,21 +39,17 @@
   <aside class="menu-panel" aria-hidden="true">
     <div class="menu-panel__noise"></div>
     <nav aria-label="Primary navigation">
-      <a href="#about"><span>01</span><strong>About</strong></a>
-      <a href="#services"><span>02</span><strong>Services</strong></a>
-      <a href="#work"><span>03</span><strong>Work</strong></a>
-      <a href="#process"><span>04</span><strong>Process</strong></a>
-      <a href="#contact"><span>05</span><strong>Contact</strong></a>
+      <a href="about.html"><span>01</span><strong>About</strong></a><a href="services.html"><span>02</span><strong>Services</strong></a><a href="work.html"><span>03</span><strong>Work</strong></a><a href="process.html"><span>04</span><strong>Process</strong></a><a href="contact.html"><span>05</span><strong>Contact</strong></a>
     </nav>
     <div class="menu-panel__footer">
       <p>Building digital products for ambitious companies.</p>
       <a href="mailto:hello@nowatechnologies.com">hello@nowatechnologies.com</a>
     </div>
   </aside>
-
   <main id="top">
-    <section class="hero section-dark" aria-labelledby="hero-title">
+    <section class="hero section-dark" aria-labelledby="hero-title" data-motion-section data-motion-id="section1">
       <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__webgl" aria-hidden="true"></div>
       <div class="hero__orb hero__orb--one" data-parallax="-0.14"></div>
       <div class="hero__orb hero__orb--two" data-parallax="0.09"></div>
       <div class="hero__content container">
@@ -78,13 +73,13 @@
       <div class="hero__side-note">DESIGN / DEVELOPMENT / GROWTH</div>
     </section>
 
-    <section class="statement section-light" id="about">
+    <section class="statement section-light" id="about" data-motion-section data-motion-id="section2">
       <div class="container">
         <p class="section-kicker reveal"><span>01</span> Who we are</p>
         <h2 class="statement__title split-reveal">We turn complex business challenges into clear, useful and unforgettable digital experiences.</h2>
         <div class="statement__meta reveal">
           <p>NOWA Technologies combines product thinking, expressive design and reliable engineering. One focused team, from first idea to final launch.</p>
-          <a href="#services" class="text-arrow magnetic">Explore our capabilities <span>↗</span></a>
+          <a href="services.html" class="text-arrow magnetic">Explore our capabilities <span>↗</span></a>
         </div>
       </div>
     </section>
@@ -96,12 +91,13 @@
       </div>
     </div>
 
-    <section class="services section-dark" id="services">
+    <section class="services section-dark" id="services" data-motion-section data-motion-id="section3">
       <div class="container">
         <div class="section-heading">
           <p class="section-kicker reveal"><span>02</span> What we do</p>
           <h2 class="display-title split-reveal">Services built around outcomes<span class="accent-dot">.</span></h2>
         </div>
+        <a class="home-section-link reveal" href="services.html">View all services <span>↗</span></a>
         <div class="services__layout">
           <div class="services__list">
             <article class="service-row is-active" data-service="01" data-label="PRODUCT">
@@ -160,7 +156,7 @@
       </div>
     </section>
 
-    <section class="technology section-yellow">
+    <section class="technology section-yellow" data-motion-section data-motion-id="section4">
       <div class="container technology__top">
         <p class="section-kicker reveal"><span>03</span> Technology</p>
         <h2 class="display-title split-reveal">The right stack, not the trendy stack.</h2>
@@ -182,11 +178,12 @@
       </div>
     </section>
 
-    <section class="work section-dark" id="work">
+    <section class="work section-dark" id="work" data-motion-section data-motion-id="section5">
       <div class="work__intro container">
         <p class="section-kicker reveal"><span>04</span> Selected work</p>
         <h2 class="display-title split-reveal">Ideas made tangible<span class="accent-dot">.</span></h2>
         <p class="reveal">A selection of concept projects showing our approach to product, interaction and visual systems.</p>
+        <a class="home-section-link reveal" href="work.html">Explore all work <span>↗</span></a>
       </div>
       <div class="horizontal-wrap">
         <div class="horizontal-sticky">
@@ -237,14 +234,14 @@
             </article>
             <div class="horizontal-end">
               <p>Have a project in mind?</p>
-              <a href="#contact" class="big-link magnetic">LET'S<br><span>BUILD</span> ↗</a>
+              <a href="contact.html" class="big-link magnetic">LET'S<br><span>BUILD</span> ↗</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="numbers section-light">
+    <section class="numbers section-light" data-motion-section data-motion-id="section6">
       <div class="container">
         <p class="section-kicker reveal"><span>05</span> Why NOWA</p>
         <div class="numbers__grid">
@@ -256,7 +253,7 @@
       </div>
     </section>
 
-    <section class="process section-dark" id="process">
+    <section class="process section-dark" id="process" data-motion-section data-motion-id="section7">
       <div class="container">
         <div class="process__heading">
           <p class="section-kicker reveal"><span>06</span> How we work</p>
@@ -269,10 +266,11 @@
           <article class="process-step reveal"><span>04</span><h3>Build</h3><p>We engineer, integrate, optimize and quality-check the product across devices.</p><i></i></article>
           <article class="process-step reveal"><span>05</span><h3>Grow</h3><p>We launch, learn from real usage and keep improving the product after release.</p><i></i></article>
         </div>
+        <a class="home-section-link home-section-link--process reveal" href="process.html">See our full process <span>↗</span></a>
       </div>
     </section>
 
-    <section class="quote section-yellow">
+    <section class="quote section-yellow" data-motion-section data-motion-id="section8">
       <div class="container quote__inner">
         <div class="quote__mark">“</div>
         <blockquote class="split-reveal">NOWA understood the business problem before touching the interface. The result felt sharp, fast and genuinely built for our users.</blockquote>
@@ -280,12 +278,12 @@
       </div>
     </section>
 
-    <section class="contact section-dark" id="contact">
+    <section class="contact section-dark" id="contact" data-motion-section data-motion-id="section9">
       <div class="contact__rings" aria-hidden="true"><i></i><i></i><i></i></div>
       <div class="container contact__inner">
         <p class="section-kicker reveal"><span>07</span> Start a conversation</p>
         <h2 class="contact__title split-reveal">Have an idea worth building?</h2>
-        <button class="contact__button magnetic open-contact" type="button">LET'S TALK <span>↗</span></button>
+        <a class="contact__button magnetic" href="contact.html">LET'S TALK <span>↗</span></a>
         <div class="contact__details reveal">
           <a class="link-line" href="mailto:hello@nowatechnologies.com">hello@nowatechnologies.com</a>
           <p>Available for selected projects worldwide.</p>
@@ -293,39 +291,40 @@
       </div>
     </section>
   </main>
-
   <footer class="footer">
     <div class="container footer__grid">
-      <div><img src="assets/images/nowa-stacked.png" alt="NOWA Technologies"></div>
-      <div><p>Explore</p><a href="#about">About</a><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a></div>
+      <div><a href="index.html"><img src="assets/images/nowa-stacked.png" alt="NOWA Technologies"></a></div>
+      <div><p>Explore</p><a href="about.html">About</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="process.html">Process</a></div>
       <div><p>Social</p><a href="#">LinkedIn ↗</a><a href="#">Instagram ↗</a><a href="#">Dribbble ↗</a></div>
-      <div><p>Contact</p><a href="mailto:hello@nowatechnologies.com">Email us ↗</a><a href="#contact">Start a project ↗</a></div>
+      <div><p>Contact</p><a href="mailto:hello@nowatechnologies.com">Email us ↗</a><a href="contact.html">Start a project ↗</a></div>
     </div>
     <div class="container footer__bottom"><span>© <span id="year"></span> NOWA Technologies</span><span>Strategy · Design · Technology</span><a href="#top">Back to top ↑</a></div>
   </footer>
-
   <dialog class="contact-modal">
-    <button class="modal-close" type="button" aria-label="Close contact form">×</button>
-    <div class="contact-modal__intro">
-      <img src="assets/images/nowa-mark.png" alt="">
-      <p>Tell us what you are building.</p>
-      <h2>Let’s make it real<span class="accent-dot">.</span></h2>
-    </div>
-    <form class="contact-form" novalidate>
-      <label><span>Your name</span><input name="name" type="text" placeholder="Jane Smith" required></label>
-      <label><span>Email address</span><input name="email" type="email" placeholder="jane@company.com" required></label>
-      <label><span>Company / brand</span><input name="company" type="text" placeholder="Company name"></label>
-      <label><span>What do you need?</span>
-        <select name="service" required>
-          <option value="">Select a service</option><option>Website</option><option>Web application</option><option>Mobile application</option><option>UX/UI design</option><option>Brand identity</option><option>Other</option>
-        </select>
-      </label>
-      <label class="full"><span>Project details</span><textarea name="message" rows="4" placeholder="Share the goal, scope and ideal timeline." required></textarea></label>
-      <button class="form-submit magnetic" type="submit">Send inquiry <span>↗</span></button>
-      <p class="form-status" role="status"></p>
-    </form>
-  </dialog>
-
+<button aria-label="Close contact form" class="modal-close" type="button">×</button>
+<div class="contact-modal__intro">
+<img alt="" src="assets/images/nowa-mark.png"/>
+<p>Tell us what you are building.</p>
+<h2>Let’s make it real<span class="accent-dot">.</span></h2>
+</div>
+<form class="contact-form" novalidate="">
+<label><span>Your name</span><input name="name" placeholder="Jane Smith" required="" type="text"/></label>
+<label><span>Email address</span><input name="email" placeholder="jane@company.com" required="" type="email"/></label>
+<label><span>Company / brand</span><input name="company" placeholder="Company name" type="text"/></label>
+<label><span>What do you need?</span>
+<select name="service" required="">
+<option value="">Select a service</option><option>Website</option><option>Web application</option><option>Mobile application</option><option>UX/UI design</option><option>Brand identity</option><option>Other</option>
+</select>
+</label>
+<label class="full"><span>Project details</span><textarea name="message" placeholder="Share the goal, scope and ideal timeline." required="" rows="4"></textarea></label>
+<button class="form-submit magnetic" type="submit">Send inquiry <span>↗</span></button>
+<p class="form-status" role="status"></p>
+</form>
+</dialog>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script src="assets/js/smooth-scroll.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="assets/js/three-scene.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 </html>

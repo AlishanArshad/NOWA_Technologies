@@ -47,6 +47,7 @@
   const horizontalWrap = qs('.horizontal-wrap');
   const horizontalTrack = qs('.horizontal-track');
   const parallaxItems = qsa('[data-parallax]');
+  const splitRevealItems = qsa('.split-reveal');
   let lastY = window.scrollY;
   let ticking = false;
 
@@ -69,10 +70,25 @@
         const speed = Number(item.dataset.parallax || 0);
         item.style.transform = `translate3d(0, ${y * speed}px, 0)`;
       });
+
+      // Scroll-linked text fill. Each split-reveal heading progressively
+      // changes from muted to its section's real text color while it moves
+      // through the viewport for NOWA's progressive text-fill motion.
+      splitRevealItems.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        // Skip expensive work for headings that are far outside the viewport.
+        if (rect.bottom < -window.innerHeight * .35 || rect.top > window.innerHeight * 1.35) return;
+        const start = window.innerHeight * 0.88;
+        const end = window.innerHeight * 0.28;
+        const value = clamp(0, (start - rect.top) / Math.max(1, start - end), 1);
+        item.style.setProperty('--reveal', `${(value * 100).toFixed(3)}%`);
+        item.classList.toggle('in-view', value > 0.01);
+      });
+    } else {
+      splitRevealItems.forEach((item) => item.style.setProperty('--reveal', '100%'));
     }
 
     updateHorizontalRail();
-    updateSplitReveal();
   };
 
   const requestScrollUpdate = () => {
@@ -95,16 +111,6 @@
     horizontalTrack.style.transform = `translate3d(${-maxX * progressValue}px,0,0)`;
   };
 
-  const splitElements = qsa('.split-reveal');
-  const updateSplitReveal = () => {
-    splitElements.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      const start = window.innerHeight * 0.9;
-      const end = window.innerHeight * 0.18;
-      const value = clamp(0, (start - rect.top) / (start - end), 1);
-      el.style.setProperty('--reveal', `${value * 100}%`);
-    });
-  };
 
   window.addEventListener('scroll', requestScrollUpdate, { passive: true });
   window.addEventListener('resize', requestScrollUpdate, { passive: true });
@@ -242,12 +248,58 @@
     });
   }
 
+  // Premium depth interactions: project-card tilt and a soft magnetic technology cloud.
+  if (finePointer && !reducedMotion) {
+    qsa('.project-card').forEach((card) => {
+      let frame = 0;
+      card.addEventListener('mousemove', (event) => {
+        if (frame) cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const nx = (event.clientX - rect.left) / rect.width - .5;
+          const ny = (event.clientY - rect.top) / rect.height - .5;
+          const rotateY = nx * 4.2;
+          const rotateX = ny * -3.2;
+          card.style.transform = `perspective(1300px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px) scale(1.008)`;
+        });
+      });
+      card.addEventListener('mouseleave', () => {
+        if (frame) cancelAnimationFrame(frame);
+        card.style.transform = '';
+      });
+    });
+
+    const techCloud = qs('.tech-cloud');
+    const techItems = techCloud ? qsa('span', techCloud) : [];
+    if (techCloud && techItems.length) {
+      techCloud.addEventListener('mousemove', (event) => {
+        const cloudRect = techCloud.getBoundingClientRect();
+        techItems.forEach((item) => {
+          const rect = item.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = event.clientX - cx;
+          const dy = event.clientY - cy;
+          const distance = Math.max(90, Math.hypot(dx, dy));
+          const influence = Math.max(0, 1 - distance / Math.max(cloudRect.width * .52, 500));
+          item.style.setProperty('--mx', `${dx * influence * .026}px`);
+          item.style.setProperty('--my', `${dy * influence * .026}px`);
+        });
+      }, { passive: true });
+      techCloud.addEventListener('mouseleave', () => {
+        techItems.forEach((item) => {
+          item.style.setProperty('--mx', '0px');
+          item.style.setProperty('--my', '0px');
+        });
+      });
+    }
+  }
+
   // Contact modal and demo form validation.
   const modal = qs('.contact-modal');
   const openButtons = qsa('.open-contact');
   const modalClose = qs('.modal-close');
-  const form = qs('.contact-form');
-  const formStatus = qs('.form-status');
+  const forms = qsa('.contact-form');
 
   function openModal() {
     if (!modal) return;
@@ -273,28 +325,53 @@
   });
   modal?.addEventListener('close', () => document.body.classList.remove('modal-open'));
 
-  form?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    if (!form.checkValidity()) {
-      formStatus.textContent = 'Please complete the required fields.';
-      formStatus.className = 'form-status error';
-      form.reportValidity();
-      return;
-    }
-    const submit = qs('.form-submit', form);
-    if (submit) {
-      submit.disabled = true;
-      submit.textContent = 'Sending…';
-    }
-    window.setTimeout(() => {
-      formStatus.textContent = 'Thanks — your inquiry is ready. Connect this form to your email or CRM before launch.';
-      formStatus.className = 'form-status success';
-      form.reset();
-      if (submit) {
-        submit.disabled = false;
-        submit.innerHTML = 'Send inquiry <span>↗</span>';
+  forms.forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const formStatus = qs('.form-status', form);
+      if (!form.checkValidity()) {
+        if (formStatus) {
+          formStatus.textContent = 'Please complete the required fields.';
+          formStatus.className = 'form-status error';
+        }
+        form.reportValidity();
+        return;
       }
-    }, 850);
+      const submit = qs('.form-submit', form);
+      if (submit) {
+        submit.disabled = true;
+        submit.textContent = 'Sending…';
+      }
+      window.setTimeout(() => {
+        if (formStatus) {
+          formStatus.textContent = 'Thanks — your inquiry is ready. Connect this form to your email or CRM before launch.';
+          formStatus.className = 'form-status success';
+        }
+        form.reset();
+        if (submit) {
+          submit.disabled = false;
+          submit.innerHTML = 'Send inquiry <span>↗</span>';
+        }
+      }, 850);
+    });
+  });
+
+  // Smooth page-to-page transition for the new multi-page structure.
+  qsa('a[href]').forEach((link) => {
+    const rawHref = link.getAttribute('href');
+    if (!rawHref || rawHref.startsWith('#') || rawHref.startsWith('mailto:') || rawHref.startsWith('tel:') || link.target === '_blank') return;
+    let url;
+    try { url = new URL(rawHref, window.location.href); } catch (_) { return; }
+    if (url.origin !== window.location.origin || !/\.html$/i.test(url.pathname)) return;
+    link.addEventListener('click', (event) => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button === 1) return;
+      if (url.href === window.location.href) return;
+      event.preventDefault();
+      toggleMenu(false);
+      closeModal();
+      document.body.classList.add('page-leaving');
+      window.setTimeout(() => { window.location.href = url.href; }, reducedMotion ? 20 : 430);
+    });
   });
 
   // Internal link correction when a modal/menu is open.
@@ -307,10 +384,127 @@
       event.preventDefault();
       toggleMenu(false);
       closeModal();
-      target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+      if (window.nowaLenis && !reducedMotion) {
+        const headerOffset = (header?.offsetHeight || 76) + 8;
+        window.nowaLenis.scrollTo(target, { offset: -headerOffset, duration: 1.05 });
+      } else {
+        target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+      }
     });
   });
 
   const year = qs('#year');
   if (year) year.textContent = String(new Date().getFullYear());
+})();
+
+// Note: extra page-level interactions are registered in a separate IIFE so the
+// original NOWA motion layer stays untouched.
+(() => {
+  'use strict';
+  const qsa = (s, root=document) => [...root.querySelectorAll(s)];
+  const qs = (s, root=document) => root.querySelector(s);
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (a,v,b) => Math.max(a,Math.min(v,b));
+
+  // Track NOWA page chapters independently for in-view state.
+  const scrollSections = qsa('[data-motion-section]');
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.setAttribute('data-motion-inview','');
+      else entry.target.removeAttribute('data-motion-inview');
+    });
+  }, { threshold: 0.03, rootMargin: '20% 0px 20% 0px' });
+  scrollSections.forEach((section,index) => {
+    if (!section.dataset.motionId) section.dataset.motionId = `section${index + 1}`;
+    sectionObserver.observe(section);
+  });
+
+  // Local parallax based on each element's own viewport position.
+  const parallax = qsa('[data-depth-speed]');
+  const kinetic = qsa('[data-kinetic]');
+  let raf = 0;
+  const update = () => {
+    raf = 0;
+    if (reduced) return;
+    parallax.forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > innerHeight + 200) return;
+      const speed = Number(el.dataset.depthSpeed || 0);
+      const center = r.top + r.height/2 - innerHeight/2;
+      el.style.transform = `translate3d(0,${center * speed}px,0)`;
+    });
+    kinetic.forEach(el => {
+      const r = el.parentElement.getBoundingClientRect();
+      const p = clamp(-1, (innerHeight/2 - (r.top+r.height/2))/innerHeight, 1);
+      const direction = el.dataset.kinetic === 'right' ? 1 : -1;
+      el.style.transform = `translate3d(${p * direction * 8}vw,0,0)`;
+    });
+  };
+  const request = () => { if (!raf) raf=requestAnimationFrame(update); };
+  addEventListener('scroll',request,{passive:true});
+  addEventListener('resize',request,{passive:true});
+  request();
+
+  // About/technology tab system.
+  qsa('[data-tabs]').forEach(group => {
+    const buttons=qsa('[data-tab]',group), panels=qsa('[data-panel]',group);
+    buttons.forEach(btn => btn.addEventListener('click',() => {
+      const key=btn.dataset.tab;
+      buttons.forEach(b=>b.classList.toggle('is-active',b===btn));
+      panels.forEach(p=>p.classList.toggle('is-active',p.dataset.panel===key));
+    }));
+  });
+
+  // Services index controls the sticky visual, giving every service a different state.
+  const serviceSphere=qs('.service-index__sphere');
+  const serviceRows=qsa('.service-index-row');
+  serviceRows.forEach(row => {
+    const activate=() => {
+      serviceRows.forEach(x=>x.classList.remove('is-active'));
+      row.classList.add('is-active');
+      if (!serviceSphere) return;
+      const num=row.dataset.indexService || '01';
+      const label=row.dataset.indexLabel || 'NOWA';
+      const b=qs('b',serviceSphere), span=qs('span',serviceSphere), ring=qs('i',serviceSphere);
+      if (b) b.textContent=num;
+      if (span) span.textContent=label;
+      if (ring && !reduced) ring.animate([
+        {transform:'scaleY(.4) rotate(16deg)'},
+        {transform:`scaleY(.58) rotate(${38 + Number(num)*31}deg)`},
+        {transform:'scaleY(.4) rotate(16deg)'}
+      ],{duration:760,easing:'cubic-bezier(.16,1,.3,1)'});
+    };
+    row.addEventListener('mouseenter',activate);
+    row.addEventListener('focusin',activate);
+  });
+
+  // FAQ accordion.
+  qsa('[data-accordion] .faq-item').forEach(item => {
+    const button=qs('button',item);
+    button?.addEventListener('click',() => {
+      const open=item.classList.contains('is-open');
+      qsa('[data-accordion] .faq-item').forEach(x=>x.classList.remove('is-open'));
+      if (!open) item.classList.add('is-open');
+    });
+  });
+
+  // Small depth response for the new visual cards.
+  if (matchMedia('(pointer:fine)').matches && !reduced) {
+    qsa('.mission-panel__visual,.service-art,.work-case__visual,.global-orbit,.availability-orbit').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const r=el.getBoundingClientRect();
+        const x=(e.clientX-r.left)/r.width-.5;
+        const y=(e.clientY-r.top)/r.height-.5;
+        el.style.setProperty('--tilt-x',`${y*-2.2}deg`);
+        el.style.setProperty('--tilt-y',`${x*2.8}deg`);
+        const base=el.dataset.depthSpeed ? el.style.transform : '';
+        el.style.filter=`brightness(${1 + Math.abs(x)*.035})`;
+        if (!el.dataset.depthSpeed) el.style.transform=`perspective(1200px) rotateX(${y*-2.2}deg) rotateY(${x*2.8}deg)`;
+      });
+      el.addEventListener('mouseleave',() => {
+        el.style.filter='';
+        if (!el.dataset.depthSpeed) el.style.transform='';
+      });
+    });
+  }
 })();
