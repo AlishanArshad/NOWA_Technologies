@@ -401,20 +401,20 @@
 // original NOWA motion layer stays untouched.
 (() => {
   'use strict';
-  const qsa = (s, root=document) => [...root.querySelectorAll(s)];
-  const qs = (s, root=document) => root.querySelector(s);
+  const qsa = (s, root = document) => [...root.querySelectorAll(s)];
+  const qs = (s, root = document) => root.querySelector(s);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const clamp = (a,v,b) => Math.max(a,Math.min(v,b));
+  const clamp = (a, v, b) => Math.max(a, Math.min(v, b));
 
   // Track NOWA page chapters independently for in-view state.
   const scrollSections = qsa('[data-motion-section]');
   const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.setAttribute('data-motion-inview','');
+      if (entry.isIntersecting) entry.target.setAttribute('data-motion-inview', '');
       else entry.target.removeAttribute('data-motion-inview');
     });
   }, { threshold: 0.03, rootMargin: '20% 0px 20% 0px' });
-  scrollSections.forEach((section,index) => {
+  scrollSections.forEach((section, index) => {
     if (!section.dataset.motionId) section.dataset.motionId = `section${index + 1}`;
     sectionObserver.observe(section);
   });
@@ -430,60 +430,60 @@
       const r = el.getBoundingClientRect();
       if (r.bottom < -200 || r.top > innerHeight + 200) return;
       const speed = Number(el.dataset.depthSpeed || 0);
-      const center = r.top + r.height/2 - innerHeight/2;
+      const center = r.top + r.height / 2 - innerHeight / 2;
       el.style.transform = `translate3d(0,${center * speed}px,0)`;
     });
     kinetic.forEach(el => {
       const r = el.parentElement.getBoundingClientRect();
-      const p = clamp(-1, (innerHeight/2 - (r.top+r.height/2))/innerHeight, 1);
+      const p = clamp(-1, (innerHeight / 2 - (r.top + r.height / 2)) / innerHeight, 1);
       const direction = el.dataset.kinetic === 'right' ? 1 : -1;
       el.style.transform = `translate3d(${p * direction * 8}vw,0,0)`;
     });
   };
-  const request = () => { if (!raf) raf=requestAnimationFrame(update); };
-  addEventListener('scroll',request,{passive:true});
-  addEventListener('resize',request,{passive:true});
+  const request = () => { if (!raf) raf = requestAnimationFrame(update); };
+  addEventListener('scroll', request, { passive: true });
+  addEventListener('resize', request, { passive: true });
   request();
 
   // About/technology tab system.
   qsa('[data-tabs]').forEach(group => {
-    const buttons=qsa('[data-tab]',group), panels=qsa('[data-panel]',group);
-    buttons.forEach(btn => btn.addEventListener('click',() => {
-      const key=btn.dataset.tab;
-      buttons.forEach(b=>b.classList.toggle('is-active',b===btn));
-      panels.forEach(p=>p.classList.toggle('is-active',p.dataset.panel===key));
+    const buttons = qsa('[data-tab]', group), panels = qsa('[data-panel]', group);
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      const key = btn.dataset.tab;
+      buttons.forEach(b => b.classList.toggle('is-active', b === btn));
+      panels.forEach(p => p.classList.toggle('is-active', p.dataset.panel === key));
     }));
   });
 
   // Services index controls the sticky visual, giving every service a different state.
-  const serviceSphere=qs('.service-index__sphere');
-  const serviceRows=qsa('.service-index-row');
+  const serviceSphere = qs('.service-index__sphere');
+  const serviceRows = qsa('.service-index-row');
   serviceRows.forEach(row => {
-    const activate=() => {
-      serviceRows.forEach(x=>x.classList.remove('is-active'));
+    const activate = () => {
+      serviceRows.forEach(x => x.classList.remove('is-active'));
       row.classList.add('is-active');
       if (!serviceSphere) return;
-      const num=row.dataset.indexService || '01';
-      const label=row.dataset.indexLabel || 'NOWA';
-      const b=qs('b',serviceSphere), span=qs('span',serviceSphere), ring=qs('i',serviceSphere);
-      if (b) b.textContent=num;
-      if (span) span.textContent=label;
+      const num = row.dataset.indexService || '01';
+      const label = row.dataset.indexLabel || 'NOWA';
+      const b = qs('b', serviceSphere), span = qs('span', serviceSphere), ring = qs('i', serviceSphere);
+      if (b) b.textContent = num;
+      if (span) span.textContent = label;
       if (ring && !reduced) ring.animate([
-        {transform:'scaleY(.4) rotate(16deg)'},
-        {transform:`scaleY(.58) rotate(${38 + Number(num)*31}deg)`},
-        {transform:'scaleY(.4) rotate(16deg)'}
-      ],{duration:760,easing:'cubic-bezier(.16,1,.3,1)'});
+        { transform: 'scaleY(.4) rotate(16deg)' },
+        { transform: `scaleY(.58) rotate(${38 + Number(num) * 31}deg)` },
+        { transform: 'scaleY(.4) rotate(16deg)' }
+      ], { duration: 760, easing: 'cubic-bezier(.16,1,.3,1)' });
     };
-    row.addEventListener('mouseenter',activate);
-    row.addEventListener('focusin',activate);
+    row.addEventListener('mouseenter', activate);
+    row.addEventListener('focusin', activate);
   });
 
   // FAQ accordion.
   qsa('[data-accordion] .faq-item').forEach(item => {
-    const button=qs('button',item);
-    button?.addEventListener('click',() => {
-      const open=item.classList.contains('is-open');
-      qsa('[data-accordion] .faq-item').forEach(x=>x.classList.remove('is-open'));
+    const button = qs('button', item);
+    button?.addEventListener('click', () => {
+      const open = item.classList.contains('is-open');
+      qsa('[data-accordion] .faq-item').forEach(x => x.classList.remove('is-open'));
       if (!open) item.classList.add('is-open');
     });
   });
@@ -492,18 +492,18 @@
   if (matchMedia('(pointer:fine)').matches && !reduced) {
     qsa('.mission-panel__visual,.service-art,.work-case__visual,.global-orbit,.availability-orbit').forEach(el => {
       el.addEventListener('mousemove', e => {
-        const r=el.getBoundingClientRect();
-        const x=(e.clientX-r.left)/r.width-.5;
-        const y=(e.clientY-r.top)/r.height-.5;
-        el.style.setProperty('--tilt-x',`${y*-2.2}deg`);
-        el.style.setProperty('--tilt-y',`${x*2.8}deg`);
-        const base=el.dataset.depthSpeed ? el.style.transform : '';
-        el.style.filter=`brightness(${1 + Math.abs(x)*.035})`;
-        if (!el.dataset.depthSpeed) el.style.transform=`perspective(1200px) rotateX(${y*-2.2}deg) rotateY(${x*2.8}deg)`;
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - .5;
+        const y = (e.clientY - r.top) / r.height - .5;
+        el.style.setProperty('--tilt-x', `${y * -2.2}deg`);
+        el.style.setProperty('--tilt-y', `${x * 2.8}deg`);
+        const base = el.dataset.depthSpeed ? el.style.transform : '';
+        el.style.filter = `brightness(${1 + Math.abs(x) * .035})`;
+        if (!el.dataset.depthSpeed) el.style.transform = `perspective(1200px) rotateX(${y * -2.2}deg) rotateY(${x * 2.8}deg)`;
       });
-      el.addEventListener('mouseleave',() => {
-        el.style.filter='';
-        if (!el.dataset.depthSpeed) el.style.transform='';
+      el.addEventListener('mouseleave', () => {
+        el.style.filter = '';
+        if (!el.dataset.depthSpeed) el.style.transform = '';
       });
     });
   }
